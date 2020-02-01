@@ -129,4 +129,11 @@ export EDITOR=vim
 export PATH="/root/.cargo/bin:$PATH"
 
 # Entr 
-echo ~/.bashrc | cp -f ~/.bashrc ~/development ; cd  ~/development/dotfiles ; git add -A ; git commit -m "" 
+echo ~/.bashrc | entr cp -f ~/.bashrc ~/development ; cd  ~/development/dotfiles ; git add -A ; git commit -m "" ; notify-send "Updated" 
+
+echo ~/.bashrc | entr notify-send "Updated1"
+
+##
+
+
+
