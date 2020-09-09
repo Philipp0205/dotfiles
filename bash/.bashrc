@@ -116,24 +116,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#Flutter
-export PATH="~/Documents/development/flutter/bin:$PATH"
-
-# fasd
 eval "$(fasd --init auto)"
 
-export EDITOR=vim
-
-# tmuxinator start test2
-
-export PATH="/root/.cargo/bin:$PATH"
-
-# Entr 
-echo ~/.bashrc | entr cp -f ~/.bashrc ~/development ; cd  ~/development/dotfiles ; git add -A ; git commit -m "" ; notify-send "Updated" 
-
-echo ~/.bashrc | entr notify-send "Updated1"
-
-##
 
 
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+export PATH=$PATH:~/snap
+export PATH=$PATH:~/usr/local/bin/
+alias b='buku --suggest'
 

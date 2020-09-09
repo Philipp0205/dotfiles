@@ -1,0 +1,18 @@
+[
+  {
+    "type": "Count",
+    "name": "Sport",
+    "stats": {},
+    "goal": 0,
+    "auto": false
+  },
+  {
+    "type": "Count",
+    "name": "Supplements",
+    "stats": {
+      "2020-09-07": 1
+    },
+    "goal": 0,
+    "auto": false
+  }
+]
