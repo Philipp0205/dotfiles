@@ -1,0 +1,15 @@
+color listfocus black white standout bold
+color listfocus_unread white black bold
+color info red black bold
+
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+
+browser "firefox %u"
+
+# Podboat
+download-path "~/Music/Podcasts/"
+max-downloads 10
+player "vlc"
