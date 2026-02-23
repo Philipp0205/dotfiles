@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["custom-instructions.md"],
+  "model": "github-copilot/claude-sonnet-4.5",
+  "mcp": {
+    "github": {
+      "type": "remote",
+       "headers": {
+        "Authorization": "Bearer YOUR_GITHUB_TOKEN_HERE"
+       },
+      "url": "https://api.githubcopilot.com/mcp/"
+    }
+  }
+}
