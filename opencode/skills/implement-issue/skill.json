@@ -1,0 +1,11 @@
+{
+  "name": "implement-issue",
+  "description": "Implements plans from GitHub issues using a worktree-based workflow with review before merging",
+  "version": "1.0.0",
+  "commands": [
+    {
+      "name": "implement-issue",
+      "description": "Implement a GitHub issue in a new worktree, review changes, and create a PR"
+    }
+  ]
+}
