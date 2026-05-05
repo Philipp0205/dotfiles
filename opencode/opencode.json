@@ -1,14 +1,113 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["custom-instructions.md"],
-  "model": "github-copilot/claude-sonnet-4.5",
+  "autoupdate": true,
+  "permission": "allow",
+  "model": "advantest/claude-4-6-opus",
+  "agent": {
+    "general": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "explore": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "ContextScout": {
+      "model": "advantest/claude-4-6-opus"
+    },
+    "ExternalScout": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "TaskManager": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "CoderAgent": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "TestEngineer": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "CodeReviewer": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "DocWriter": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "BuildAgent": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "OpenFrontendSpecialist": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "OpenDevopsSpecialist": {
+      "model": "advantest/claude-sonnet-4-6"
+    },
+    "ContextOrganizer": {
+      "model": "advantest/claude-sonnet-4-6"
+    }
+  },
   "mcp": {
-    "github": {
+    "context7": {
       "type": "remote",
-       "headers": {
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    },
+    "grep_app": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
+    },
+    "websearch": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
+      "enabled": true
+    },
+    "github-mcp": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
         "Authorization": "Bearer YOUR_GITHUB_TOKEN_HERE"
-       },
-      "url": "https://api.githubcopilot.com/mcp/"
+      },
+      "enabled": true
+    }
+  },
+  "provider": {
+    "advantest": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Advantest AI Gateway",
+      "options": {
+        "baseURL": "https://api.ai-gateway.advantest.cloud/api/v1",
+        "apiKey": "YOUR_ADVANTEST_API_KEY_HERE"
+      },
+      "models": {
+        "claude-4-6-opus": {
+          "name": "Claude Opus 4.6",
+          "limit": {
+            "context": 128000,
+            "output": 4096
+          }
+        },
+        "claude-sonnet-4-6": {
+          "name": "Claude Sonnet 4.6",
+          "limit": {
+            "context": 200000,
+            "output": 16384
+          }
+        }
+      }
+    }
+  },
+  "plugin": [
+    "@slkiser/opencode-quota"
+  ],
+  "experimental": {
+    "quotaToast": {
+      "enableToast": true,
+      "showSessionTokens": true,
+      "enabledProviders": [
+        "copilot",
+        "openai"
+      ],
+      "formatStyle": "classic",
+      "percentDisplayMode": "remaining"
     }
   }
 }
