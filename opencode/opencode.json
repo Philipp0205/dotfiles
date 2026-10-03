@@ -1,113 +1,145 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": true,
-  "permission": "allow",
-  "model": "advantest/claude-4-6-opus",
   "agent": {
-    "general": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "explore": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "ContextScout": {
-      "model": "advantest/claude-4-6-opus"
-    },
-    "ExternalScout": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "TaskManager": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "CoderAgent": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "TestEngineer": {
-      "model": "advantest/claude-sonnet-4-6"
+    "BuildAgent": {
+      "model": "github-copilot/claude-sonnet-4-6"
     },
     "CodeReviewer": {
-      "model": "advantest/claude-sonnet-4-6"
+      "model": "github-copilot/claude-4-6-opus"
     },
-    "DocWriter": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "BuildAgent": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "OpenFrontendSpecialist": {
-      "model": "advantest/claude-sonnet-4-6"
-    },
-    "OpenDevopsSpecialist": {
-      "model": "advantest/claude-sonnet-4-6"
+    "CoderAgent": {
+      "model": "github-copilot/claude-4-6-opus"
     },
     "ContextOrganizer": {
-      "model": "advantest/claude-sonnet-4-6"
+      "model": "github-copilot/claude-4-6-opus"
+    },
+    "ContextScout": {
+      "model": "github-copilot/claude-sonnet-4-6"
+    },
+    "DocWriter": {
+      "model": "github-copilot/claude-sonnet-4-6"
+    },
+    "ExternalScout": {
+      "model": "github-copilot/claude-sonnet-4-6"
+    },
+    "OpenDevopsSpecialist": {
+      "model": "github-copilot/claude-4-6-opus"
+    },
+    "OpenFrontendSpecialist": {
+      "model": "github-copilot/claude-4-6-opus"
+    },
+    "TaskManager": {
+      "model": "github-copilot/claude-4-6-opus"
+    },
+    "TestEngineer": {
+      "model": "github-copilot/claude-sonnet-4-6"
+    },
+    "explore": {
+      "model": "github-copilot/claude-sonnet-4-6"
+    },
+    "general": {
+      "model": "github-copilot/claude-sonnet-4-6"
+    }
+  },
+  "autoupdate": true,
+  "experimental": {
+    "quotaToast": {
+      "enableToast": true,
+      "enabledProviders": [
+        "copilot",
+        "anthropic",
+        "openai"
+      ],
+      "formatStyle": "classic",
+      "percentDisplayMode": "remaining",
+      "showSessionTokens": true
     }
   },
   "mcp": {
     "context7": {
+      "enabled": true,
       "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "enabled": true
+      "url": "https://mcp.context7.com/mcp"
     },
-    "grep_app": {
+    "eclipse": {
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:ECLIPSE_MCP_TOKEN}"
+      },
       "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true
-    },
-    "websearch": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
-      "enabled": true
+      "url": "http://127.0.0.1:8642/mcp"
     },
     "github-mcp": {
-      "type": "remote",
-      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
       "headers": {
-        "Authorization": "Bearer YOUR_GITHUB_TOKEN_HERE"
+        "Authorization": "Bearer {env:GITHUB_MCP_TOKEN}"
       },
-      "enabled": true
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "grep_app": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.grep.app"
+    },
+    "mobbin": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://api.mobbin.com/mcp"
+    },
+    "playwright": {
+      "command": [
+        "npx",
+        "@playwright/mcp@latest",
+        "--headless"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "railway": {
+      "command": [
+        "railway",
+        "mcp"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "vaadin": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.vaadin.com/docs"
+    },
+    "websearch": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa"
     }
   },
-  "provider": {
-    "advantest": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Advantest AI Gateway",
-      "options": {
-        "baseURL": "https://api.ai-gateway.advantest.cloud/api/v1",
-        "apiKey": "YOUR_ADVANTEST_API_KEY_HERE"
-      },
-      "models": {
-        "claude-4-6-opus": {
-          "name": "Claude Opus 4.6",
-          "limit": {
-            "context": 128000,
-            "output": 4096
-          }
-        },
-        "claude-sonnet-4-6": {
-          "name": "Claude Sonnet 4.6",
-          "limit": {
-            "context": 200000,
-            "output": 16384
-          }
-        }
-      }
-    }
-  },
+  "model": "github-copilot/claude-sonnet-4-6",
+  "permission": "allow",
   "plugin": [
     "@slkiser/opencode-quota"
   ],
-  "experimental": {
-    "quotaToast": {
-      "enableToast": true,
-      "showSessionTokens": true,
-      "enabledProviders": [
-        "copilot",
-        "openai"
-      ],
-      "formatStyle": "classic",
-      "percentDisplayMode": "remaining"
+  "provider": {
+    "advantest": {
+      "models": {
+        "claude-4-6-opus": {
+          "limit": {
+            "context": 128000,
+            "output": 4096
+          },
+          "name": "Claude Opus 4.6",
+          "reasoning": false
+        },
+        "claude-sonnet-4-6": {
+          "limit": {
+            "context": 200000,
+            "output": 16384
+          },
+          "name": "Claude Sonnet 4.6",
+          "reasoning": false
+        }
+      }
     }
   }
 }
