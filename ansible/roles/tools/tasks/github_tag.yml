@@ -1,0 +1,10 @@
+- name: "Resolve latest release tag of {{ repo }}"
+  ansible.builtin.uri:
+    url: "https://github.com/{{ repo }}/releases/latest"
+    follow_redirects: none
+    status_code: 302
+  register: _latest
+  check_mode: false
+
+- ansible.builtin.set_fact:
+    latest_tag: "{{ _latest.location | basename }}"

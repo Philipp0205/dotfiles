@@ -1,0 +1,48 @@
+[language-server.typescript-language-server.config]
+hostInfo = "helix"
+
+[language-server.typescript-language-server.config.typescript.inlayHints]
+includeInlayParameterNameHints = "all"
+includeInlayVariableTypeHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.eslint.config]
+validate = "on"
+workingDirectory = { mode = "auto" }
+
+[language-server.lsp-ai]
+command = "lsp-ai"
+
+[language-server.lsp-ai.config.memory]
+file_store = {}
+
+[language-server.lsp-ai.config.models.model1]
+type = "ollama"
+model = "qwen2.5-coder:1.5b-base"
+
+[language-server.lsp-ai.config.completion]
+model = "model1"
+
+[language-server.lsp-ai.config.completion.parameters]
+max_context = 1024
+options.num_predict = 64
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server", "eslint", "lsp-ai"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server", "eslint", "lsp-ai"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "java"
+language-servers = ["jdtls", "lsp-ai"]

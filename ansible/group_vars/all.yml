@@ -1,0 +1,14 @@
+bin_dir: "{{ ansible_env.HOME }}/.local/bin"
+share_dir: "{{ ansible_env.HOME }}/.local/share"
+
+arch_go: "{{ {'x86_64': 'amd64', 'aarch64': 'arm64'}[ansible_architecture] }}"
+arch_yazi: "{{ ansible_architecture }}"
+arch_helix: "{{ {'x86_64': 'amd64', 'aarch64': 'aarch64'}[ansible_architecture] }}"
+
+base_packages:
+  - git
+  - curl
+  - unzip
+  - tar
+  - "{{ 'xz' if ansible_os_family == 'RedHat' else 'xz-utils' }}"
+  - zsh

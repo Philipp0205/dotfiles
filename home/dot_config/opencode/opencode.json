@@ -1,0 +1,85 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agents": {
+    "BuildAgent": {
+      "model": "github-copilot/claude-sonnet-4-6"
+    }
+  },
+  "update": "auto",
+  "mcp": {
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+        "disabled": false
+      },
+      "beeper": {
+        "type": "remote",
+        "url": "http://localhost:23373/v0/mcp",
+        "disabled": false
+      },
+      "eclipse": {
+        "headers": {
+          "Authorization": "Bearer 7f7c1dd2-4e53-469e-a49f-bf08786e01b3"
+        },
+        "type": "remote",
+        "url": "http://127.0.0.1:8642/mcp",
+        "disabled": true
+      },
+      "github-mcp": {
+        "headers": {
+          "Authorization": "Bearer {env:GITHUB_TOKEN}"
+        },
+        "type": "remote",
+        "url": "https://api.githubcopilot.com/mcp/",
+        "disabled": false
+      },
+      "grep_app": {
+        "type": "remote",
+        "url": "https://mcp.grep.app",
+        "disabled": false
+      },
+      "mobbin": {
+        "type": "remote",
+        "url": "https://api.mobbin.com/mcp",
+        "disabled": false
+      },
+      "playwright": {
+        "command": [
+          "npx",
+          "@playwright/mcp@latest",
+          "--headless"
+        ],
+        "type": "local",
+        "disabled": false
+      },
+      "railway": {
+        "command": [
+          "railway",
+          "mcp"
+        ],
+        "type": "local",
+        "disabled": false
+      },
+      "vaadin": {
+        "type": "remote",
+        "url": "https://mcp.vaadin.com/docs",
+        "disabled": false
+      },
+      "websearch": {
+        "type": "remote",
+        "url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
+        "disabled": false
+      }
+    }
+  },
+  "model": "github-copilot/claude-sonnet-4-6",
+  "permissions": [
+    {
+      "action": "*",
+      "resource": "*",
+      "effect": "allow"
+    }
+  ],
+  "plugins": []
+}

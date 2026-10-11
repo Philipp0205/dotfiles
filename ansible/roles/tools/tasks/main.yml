@@ -1,0 +1,75 @@
+- name: Resolve gh version
+  ansible.builtin.include_tasks: github_tag.yml
+  vars: { repo: cli/cli }
+- name: Install gh
+  ansible.builtin.unarchive:
+    src: "https://github.com/cli/cli/releases/download/{{ latest_tag }}/gh_{{ latest_tag | regex_replace('^v') }}_linux_{{ arch_go }}.tar.gz"
+    dest: "{{ ansible_env.HOME }}/.local"
+    remote_src: true
+    extra_opts: ["--strip-components=1"]
+    creates: "{{ bin_dir }}/gh"
+
+- name: Resolve fzf version
+  ansible.builtin.include_tasks: github_tag.yml
+  vars: { repo: junegunn/fzf }
+- name: Install fzf
+  ansible.builtin.unarchive:
+    src: "https://github.com/junegunn/fzf/releases/download/{{ latest_tag }}/fzf-{{ latest_tag | regex_replace('^v') }}-linux_{{ arch_go }}.tar.gz"
+    dest: "{{ bin_dir }}"
+    remote_src: true
+    creates: "{{ bin_dir }}/fzf"
+
+- name: Download yazi
+  ansible.builtin.unarchive:
+    src: "https://github.com/sxyazi/yazi/releases/latest/download/yazi-{{ arch_yazi }}-unknown-linux-musl.zip"
+    dest: /tmp
+    remote_src: true
+    creates: "/tmp/yazi-{{ arch_yazi }}-unknown-linux-musl/yazi"
+- name: Install yazi
+  ansible.builtin.copy:
+    src: "/tmp/yazi-{{ arch_yazi }}-unknown-linux-musl/{{ item }}"
+    dest: "{{ bin_dir }}/{{ item }}"
+    mode: "0755"
+    remote_src: true
+  loop: [yazi, ya]
+
+- name: Install evil-helix
+  ansible.builtin.unarchive:
+    src: "https://github.com/usagi-flow/evil-helix/releases/latest/download/evil-helix-{{ arch_helix }}-linux-musl.tar.gz"
+    dest: "{{ share_dir }}"
+    remote_src: true
+    creates: "{{ share_dir }}/helix/hx"
+- name: Move evil-helix into place
+  ansible.builtin.command: mv {{ share_dir }}/helix {{ share_dir }}/evil-helix
+  args:
+    creates: "{{ share_dir }}/evil-helix/hx"
+    removes: "{{ share_dir }}/helix/hx"
+- name: Install evil-hx wrapper and hx symlink
+  ansible.builtin.copy:
+    dest: "{{ bin_dir }}/evil-hx"
+    mode: "0755"
+    content: |
+      #!/bin/sh
+      HELIX_RUNTIME="$HOME/.local/share/evil-helix/runtime" exec "$HOME/.local/share/evil-helix/hx" "$@"
+- ansible.builtin.file:
+    src: "{{ bin_dir }}/evil-hx"
+    dest: "{{ bin_dir }}/hx"
+    state: link
+
+- name: Install herdr
+  ansible.builtin.shell: curl -fsSL https://herdr.dev/install.sh | sh
+  args:
+    creates: "{{ bin_dir }}/herdr"
+
+- name: Install opencode
+  ansible.builtin.shell: curl -fsSL https://opencode.ai/install | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.opencode/bin/opencode"
+
+- name: Install gh-dash (needs `gh auth login` first)
+  ansible.builtin.command: "{{ bin_dir }}/gh extension install dlvhdr/gh-dash"
+  args:
+    creates: "{{ share_dir }}/gh/extensions/gh-dash"
+  environment:
+    PATH: "{{ bin_dir }}:{{ ansible_env.PATH }}"
+  failed_when: false
