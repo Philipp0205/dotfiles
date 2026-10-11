@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting z pgconnect)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -121,9 +121,11 @@ ecl-egit() {
 
 
 # FZF configuration
-export PATH="$PATH:$HOME/.fzf/bin"
-source ~/.fzf/shell/completion.zsh
-source ~/.fzf/shell/key-bindings.zsh
+export PATH="$HOME/.local/bin:$PATH"
+if command -v fzf >/dev/null 2>&1; then
+    source <(fzf --zsh)
+    export FZF_CTRL_R_OPTS="--height 40% --layout=reverse --border --preview 'echo {2..}' --preview-window down:3:wrap --bind '?:toggle-preview'"
+fi
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
@@ -166,7 +168,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 alias glow="glow -s /home/philipp/.config/glow/mystyle.json"
 
 # >>> railway initialize >>>
-source "$HOME/.railway/env"
+[ -f "$HOME/.railway/env" ] && source "$HOME/.railway/env"
 # <<< railway initialize <<<
 
 # Kubri database (Railway public proxy)
@@ -174,7 +176,11 @@ export DATABASE_URL=jdbc:postgresql://gondola.proxy.rlwy.net:15486/railway
 export DATABASE_USERNAME=postgres
 export DATABASE_PASSWORD=XeAqQMQZKsXCkpqVfyqFuJaFFjnlPqzC
 
+export GITHUB_TOKEN="$(gh auth token)"
+
 # Added by the Hunk installer (https://hunk.dev)
 export PATH='/home/philipp/.hunk/bin':"$PATH"
-export PATH="$PATH:$(go env GOPATH)/bin"
-export PATH="$PATH:$(go env GOPATH)/bin"
+if command -v go >/dev/null 2>&1; then
+    export PATH="$PATH:$(go env GOPATH)/bin"
+fi
+
