@@ -1,5 +1,5 @@
 #!/bin/sh
-# Usage: curl -fsLS https://raw.githubusercontent.com/<user>/setupify/main/bootstrap.sh | sh
+# Usage: curl -fsLS https://raw.githubusercontent.com/Philipp0205/dotfiles/main/bootstrap.sh | sh
 set -eu
 REPO="${SETUPIFY_REPO:-https://github.com/Philipp0205/dotfiles.git}"
 SRC="$HOME/.local/share/chezmoi"

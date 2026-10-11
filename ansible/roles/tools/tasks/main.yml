@@ -66,6 +66,11 @@
   args:
     creates: "{{ ansible_env.HOME }}/.opencode/bin/opencode"
 
+- name: Install hunk
+  ansible.builtin.shell: curl -fsSL https://hunk.dev/install.sh | sh
+  args:
+    creates: "{{ ansible_env.HOME }}/.hunk"
+
 - name: Install gh-dash (needs `gh auth login` first)
   ansible.builtin.command: "{{ bin_dir }}/gh extension install dlvhdr/gh-dash"
   args:
