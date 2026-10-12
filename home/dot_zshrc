@@ -171,11 +171,6 @@ alias glow="glow -s /home/philipp/.config/glow/mystyle.json"
 [ -f "$HOME/.railway/env" ] && source "$HOME/.railway/env"
 # <<< railway initialize <<<
 
-# Kubri database (Railway public proxy)
-export DATABASE_URL=jdbc:postgresql://gondola.proxy.rlwy.net:15486/railway
-export DATABASE_USERNAME=postgres
-export DATABASE_PASSWORD=XeAqQMQZKsXCkpqVfyqFuJaFFjnlPqzC
-
 export GITHUB_TOKEN_OC="$(gh auth token)"
 
 # Added by the Hunk installer (https://hunk.dev)
